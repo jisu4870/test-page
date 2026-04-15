@@ -1,0 +1,220 @@
+import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { useAppContext } from '../context/AppContext';
+import { cn } from '../lib/utils';
+
+const ISLANDS = [
+  '가거도', '거문도', '거제도', '교동도', '금오도', '남해', '덕적도', '마라도', 
+  '백령도', '보길도', '비진도', '사량도', '선유도', '소매물도', '소야도', '신안', 
+  '안면도', '연화도', '완도', '울릉도', '제주도', '진도', '청산도', '추자도', '홍도'
+].sort();
+
+const DURATIONS = ['당일치기', '1박 2일', '2박 3일', '3박 4일', '4박 5일 이상'];
+
+export default function Home() {
+  const { settings, packages, magazines } = useAppContext();
+  const navigate = useNavigate();
+  
+  const [selectedIsland, setSelectedIsland] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDuration, setSelectedDuration] = useState('');
+  
+  const packagesRef = useRef<HTMLDivElement>(null);
+  const [filteredPackages, setFilteredPackages] = useState(packages);
+
+  const handleSearch = () => {
+    let result = packages;
+    if (selectedIsland) {
+      result = result.filter(p => p.island === selectedIsland);
+    }
+    if (selectedDuration) {
+      result = result.filter(p => p.duration === selectedDuration);
+    }
+    // Date filtering is skipped for this prototype as we don't have dates in packages
+    setFilteredPackages(result);
+    
+    if (packagesRef.current) {
+      packagesRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="w-full">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center">
+        <div 
+          className="absolute inset-0 bg-cover bg-center z-0"
+          style={{ backgroundImage: `url(${settings.heroImage})` }}
+        >
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+        
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+            {settings.heroTitle}
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 mb-12 font-light">
+            {settings.heroSubtitle}
+          </p>
+          
+          {/* Search Bar */}
+          <div className="bg-white rounded-2xl shadow-2xl p-4 md:p-6 max-w-5xl mx-auto flex flex-col md:flex-row gap-4 items-end">
+            <div className="flex-1 w-full text-left">
+              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+                <MapPin size={16} className="text-[var(--color-sky-blue)]" /> 어디로 떠나고 싶은가요?
+              </label>
+              <select 
+                className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-lg"
+                value={selectedIsland}
+                onChange={(e) => setSelectedIsland(e.target.value)}
+              >
+                <option value="">전체 섬</option>
+                {ISLANDS.map(island => (
+                  <option key={island} value={island}>{island}</option>
+                ))}
+              </select>
+            </div>
+            
+            <div className="flex-1 w-full text-left">
+              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+                <Calendar size={16} className="text-[var(--color-sky-blue)]" /> 출발일
+              </label>
+              <input 
+                type="date" 
+                className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-lg"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+              />
+            </div>
+            
+            <div className="flex-1 w-full text-left">
+              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+                <Clock size={16} className="text-[var(--color-sky-blue)]" /> 여행 기간
+              </label>
+              <select 
+                className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-lg"
+                value={selectedDuration}
+                onChange={(e) => setSelectedDuration(e.target.value)}
+              >
+                <option value="">전체 일정</option>
+                {DURATIONS.map(duration => (
+                  <option key={duration} value={duration}>{duration}</option>
+                ))}
+              </select>
+            </div>
+            
+            <button 
+              onClick={handleSearch}
+              className="w-full md:w-auto bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white px-8 py-4 rounded-xl font-bold transition-colors flex items-center justify-center gap-2"
+            >
+              <Search size={20} />
+              검색
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Packages Section */}
+      <section ref={packagesRef} className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">추천 프라이빗 투어</h2>
+            <p className="text-gray-600">온섬투어가 엄선한 최고의 럭셔리 섬 여행 패키지</p>
+          </div>
+          
+          {filteredPackages.length === 0 ? (
+            <div className="text-center py-20 text-gray-500">
+              검색 결과가 없습니다. 다른 조건으로 검색해보세요.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPackages.map(pkg => (
+                <div 
+                  key={pkg.id} 
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                  onClick={() => navigate(`/package/${pkg.id}`)}
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <img 
+                      src={pkg.image} 
+                      alt={pkg.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-[var(--color-sky-blue-dark)]">
+                      {pkg.island}
+                    </div>
+                    <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-white">
+                      {pkg.duration}
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">{pkg.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{pkg.description}</p>
+                    <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-100">
+                      <span className="text-lg font-bold text-gray-900">
+                        {pkg.price.toLocaleString()}원 <span className="text-sm font-normal text-gray-500">/ 1인</span>
+                      </span>
+                      <span className="text-[var(--color-sky-blue)] group-hover:translate-x-1 transition-transform">
+                        <ArrowRight size={20} />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Magazine Preview Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">온섬 매거진</h2>
+              <p className="text-gray-600">여행의 영감을 채워줄 다채로운 이야기</p>
+            </div>
+            <button 
+              onClick={() => navigate('/magazine')}
+              className="hidden md:flex items-center gap-2 text-gray-600 hover:text-[var(--color-sky-blue)] transition-colors"
+            >
+              전체보기 <ArrowRight size={16} />
+            </button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {magazines.slice(0, 2).map(post => (
+              <div 
+                key={post.id} 
+                className="group cursor-pointer"
+                onClick={() => navigate(`/magazine/${post.id}`)}
+              >
+                <div className="relative h-80 rounded-2xl overflow-hidden mb-6">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                  <span className="text-[var(--color-sky-blue)] font-medium">{post.category}</span>
+                  <span>{post.date}</span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[var(--color-sky-blue)] transition-colors">{post.title}</h3>
+              </div>
+            ))}
+          </div>
+          
+          <button 
+            onClick={() => navigate('/magazine')}
+            className="md:hidden mt-8 w-full py-4 border border-gray-200 rounded-xl text-gray-600 font-medium flex items-center justify-center gap-2"
+          >
+            전체보기 <ArrowRight size={16} />
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+}
