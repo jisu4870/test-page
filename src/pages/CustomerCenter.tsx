@@ -91,6 +91,30 @@ export default function CustomerCenter() {
                     </p>
                   </details>
                 </div>
+
+                {/* Inquiry Form */}
+                <div className="mt-16 pt-12 border-t border-gray-100">
+                  <h3 className="text-xl font-bold text-gray-900 mb-6">1:1 문의하기</h3>
+                  <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={(e) => { e.preventDefault(); alert('문의가 접수되었습니다. 빠른 시일 내에 답변 드리겠습니다.'); }}>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">성함</label>
+                      <input type="text" required className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-sky-blue)]/50" placeholder="성함을 입력해주세요" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">연락처</label>
+                      <input type="tel" required className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-sky-blue)]/50" placeholder="연락처를 입력해주세요" />
+                    </div>
+                    <div className="md:col-span-2 space-y-2">
+                      <label className="text-sm font-medium text-gray-700">문의 내용</label>
+                      <textarea required className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-sky-blue)]/50 h-32 resize-none" placeholder="문의하실 내용을 상세히 적어주세요"></textarea>
+                    </div>
+                    <div className="md:col-span-2">
+                      <button type="submit" className="w-full bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl active:scale-[0.98]">
+                        문의 접수하기
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             )}
 

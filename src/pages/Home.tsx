@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
@@ -22,6 +22,14 @@ export default function Home() {
   
   const packagesRef = useRef<HTMLDivElement>(null);
   const [filteredPackages, setFilteredPackages] = useState(packages);
+
+  useEffect(() => {
+    if (window.location.hash === '#packages' && packagesRef.current) {
+      setTimeout(() => {
+        packagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
 
   const handleSearch = () => {
     let result = packages;
@@ -51,66 +59,88 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
-            {settings.heroTitle}
-          </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-12 font-light">
-            {settings.heroSubtitle}
-          </p>
           
-          {/* Search Bar */}
-          <div className="bg-white rounded-2xl shadow-2xl p-4 md:p-6 max-w-5xl mx-auto flex flex-col md:flex-row gap-4 items-end">
-            <div className="flex-1 w-full text-left">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                <MapPin size={16} className="text-[var(--color-sky-blue)]" /> 어디로 떠나고 싶은가요?
-              </label>
-              <select 
-                className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-lg"
-                value={selectedIsland}
-                onChange={(e) => setSelectedIsland(e.target.value)}
+          {/* Search Bar & Banner Area */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            {/* Left: Search Area */}
+            <div className="lg:col-span-8 bg-white rounded-none shadow-2xl p-6 md:p-8 flex flex-col justify-between">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="text-left">
+                  <label className="block text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
+                    <MapPin size={18} className="text-[var(--color-sky-blue)]" /> 어디로 떠나세요?
+                  </label>
+                  <select 
+                    className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-xl font-medium h-[48px] appearance-none cursor-pointer rounded-none"
+                    value={selectedIsland}
+                    onChange={(e) => setSelectedIsland(e.target.value)}
+                  >
+                    <option value="">전체 섬 선택</option>
+                    {ISLANDS.map(island => (
+                      <option key={island} value={island}>{island}</option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="text-left">
+                  <label className="block text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
+                    <Calendar size={18} className="text-[var(--color-sky-blue)]" /> 출발일
+                  </label>
+                  <input 
+                    type="date" 
+                    className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-xl font-medium h-[48px] cursor-pointer rounded-none"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                  />
+                </div>
+                
+                <div className="text-left">
+                  <label className="block text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
+                    <Clock size={18} className="text-[var(--color-sky-blue)]" /> 여행 기간
+                  </label>
+                  <select 
+                    className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-xl font-medium h-[48px] appearance-none cursor-pointer rounded-none"
+                    value={selectedDuration}
+                    onChange={(e) => setSelectedDuration(e.target.value)}
+                  >
+                    <option value="">전체 일정 선택</option>
+                    {DURATIONS.map(duration => (
+                      <option key={duration} value={duration}>{duration}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              
+              <button 
+                onClick={handleSearch}
+                className="w-full bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white py-5 rounded-none font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-200 active:scale-[0.98]"
               >
-                <option value="">전체 섬</option>
-                {ISLANDS.map(island => (
-                  <option key={island} value={island}>{island}</option>
-                ))}
-              </select>
+                <Search size={24} />
+                조건에 맞는 섬 여행 찾기
+              </button>
             </div>
-            
-            <div className="flex-1 w-full text-left">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                <Calendar size={16} className="text-[var(--color-sky-blue)]" /> 출발일
-              </label>
-              <input 
-                type="date" 
-                className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-lg"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-              />
+
+            {/* Right: Discount Banner */}
+            <div className="lg:col-span-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-2xl p-8 text-white flex flex-col justify-center relative overflow-hidden group cursor-pointer">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+              <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+              
+              <div className="relative z-10">
+                <div className="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold mb-4">
+                  SPECIAL OFFER
+                </div>
+                <h3 className="text-2xl font-bold mb-2 leading-tight">
+                  신규 회원 가입 시<br/>
+                  <span className="text-yellow-300 text-4xl">10% 할인</span>
+                </h3>
+                <p className="text-white/80 text-sm mb-6">
+                  지금 가입하고 첫 섬 여행<br/>
+                  특별한 가격으로 떠나보세요!
+                </p>
+                <div className="flex items-center gap-2 text-sm font-bold group-hover:gap-4 transition-all">
+                  혜택 받으러 가기 <ArrowRight size={18} />
+                </div>
+              </div>
             </div>
-            
-            <div className="flex-1 w-full text-left">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                <Clock size={16} className="text-[var(--color-sky-blue)]" /> 여행 기간
-              </label>
-              <select 
-                className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-lg"
-                value={selectedDuration}
-                onChange={(e) => setSelectedDuration(e.target.value)}
-              >
-                <option value="">전체 일정</option>
-                {DURATIONS.map(duration => (
-                  <option key={duration} value={duration}>{duration}</option>
-                ))}
-              </select>
-            </div>
-            
-            <button 
-              onClick={handleSearch}
-              className="w-full md:w-auto bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white px-8 py-4 rounded-xl font-bold transition-colors flex items-center justify-center gap-2"
-            >
-              <Search size={20} />
-              검색
-            </button>
           </div>
 
           {/* Popular Search Terms */}
@@ -138,7 +168,7 @@ export default function Home() {
       </section>
 
       {/* Packages Section */}
-      <section ref={packagesRef} className="py-24 bg-gray-50">
+      <section id="packages" ref={packagesRef} className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">추천 프라이빗 투어</h2>
@@ -189,8 +219,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hot Deal LIVE Section */}
-      <section className="py-24 bg-white">
+            {/* Hot Deal LIVE Section */}
+      <section id="live" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
@@ -201,7 +231,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 title: '[LIVE 특가] 울릉도 크루즈 & 코스모스 리조트',
@@ -220,6 +250,12 @@ export default function Home() {
                 subtitle: '몸만 떠나는 프리미엄 글램핑',
                 date: '2026.04.25 PM 06:00',
                 image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                title: '[LIVE 특가] 백령도 비경 & 사곶 해변 투어',
+                subtitle: '천연 비행장 해변에서의 특별한 경험',
+                date: '2026.04.28 PM 08:00',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
               }
             ].map((live, idx) => (
               <div key={idx} className="group relative rounded-3xl overflow-hidden aspect-[3/4] shadow-lg">
@@ -229,6 +265,9 @@ export default function Home() {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
+                {/* Gray Overlay for Upcoming Broadcast */}
+                <div className="absolute inset-0 bg-gray-900/40 group-hover:bg-gray-900/30 transition-colors duration-500"></div>
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
                   <div className="inline-flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-bold mb-4 w-fit">
                     <Clock size={12} /> 방송예정
@@ -242,7 +281,13 @@ export default function Home() {
                     <div className="flex items-center gap-2 text-white/90 text-xs bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
                       <Calendar size={14} /> {live.date}
                     </div>
-                    <button className="w-full bg-[var(--color-sky-blue)] text-white py-3 rounded-xl font-bold text-sm hover:bg-[var(--color-sky-blue-dark)] transition-all active:scale-95 shadow-lg">
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        alert('알림설정이 완료되었습니다!');
+                      }}
+                      className="w-full bg-[var(--color-sky-blue)] text-white py-3 rounded-xl font-bold text-sm hover:bg-[var(--color-sky-blue-dark)] transition-all active:scale-95 shadow-lg"
+                    >
                       알림설정
                     </button>
                   </div>
@@ -364,7 +409,9 @@ export default function Home() {
           {/* Rating 4.5+ Banner */}
           <div className="mt-12 flex justify-center">
             <button 
-              onClick={() => navigate('/packages')}
+              onClick={() => {
+                packagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="group flex items-center gap-3 bg-white border border-gray-200 px-6 py-3 rounded-full shadow-sm hover:shadow-md hover:border-[var(--color-sky-blue)] transition-all"
             >
               <span className="flex items-center gap-1 text-yellow-400 font-bold">

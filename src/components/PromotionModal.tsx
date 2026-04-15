@@ -35,29 +35,25 @@ export default function PromotionModal() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="bg-white rounded-[32px] overflow-hidden shadow-2xl max-w-sm w-full relative"
+            className="bg-white rounded-none overflow-hidden shadow-2xl max-w-sm w-full relative"
           >
             {/* Close button for top right */}
             <button 
               onClick={handleClose} 
-              className="absolute top-4 right-4 z-10 p-2 bg-black/10 hover:bg-black/20 text-white rounded-full transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 bg-black/10 hover:bg-black/20 text-white rounded-none transition-colors"
             >
               <X size={20} />
             </button>
 
-            <div className="relative h-72 bg-gradient-to-br from-[var(--color-sky-blue)] to-[var(--color-sky-blue-dark)] flex flex-col items-center justify-center text-white p-8 text-center">
-              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
-                <span className="text-3xl">🎁</span>
-              </div>
-              <span className="bg-white/20 backdrop-blur-md text-white px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-wider">WELCOME GIFT</span>
-              <h2 className="text-3xl font-bold mb-2 leading-tight">신규 회원<br/>10% 할인 쿠폰</h2>
+            <div className="relative h-64 bg-gradient-to-br from-[var(--color-sky-blue)] to-[var(--color-sky-blue-dark)] flex flex-col items-center justify-center text-white p-8 text-center">
+              <h2 className="text-3xl font-bold mb-4 leading-tight">신규 회원<br/>10% 할인 쿠폰</h2>
               <p className="text-white/80 text-sm font-light">지금 가입하고 첫 섬 여행<br/>특별한 혜택을 받아보세요!</p>
             </div>
             
             <div className="p-8">
               <button 
                 onClick={handleClose}
-                className="w-full bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white py-4 rounded-2xl font-bold transition-all hover:shadow-lg active:scale-[0.98] mb-6"
+                className="w-full bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white py-4 rounded-none font-bold transition-all hover:shadow-lg active:scale-[0.98] mb-6"
               >
                 쿠폰 받으러 가기
               </button>
