@@ -69,14 +69,14 @@ export default function Home() {
           {/* Search Bar Area */}
           <div className="max-w-3xl mx-auto">
             {/* Search Area */}
-            <div className="bg-white rounded-lg shadow-xl p-2.5 md:p-3 flex flex-col md:flex-row items-center gap-1">
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-0 w-full px-4 md:px-6">
-                <div className="text-left py-2.5">
+            <div className="bg-white rounded-lg shadow-xl p-1.5 md:p-2 flex flex-col md:flex-row items-center gap-1">
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-0 w-full px-3 md:px-5">
+                <div className="text-left py-1.5">
                   <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-1">
                     <MapPin size={10} className="text-[var(--color-sky-blue)]" /> Destination
                   </label>
                   <select 
-                    className="w-full border-none focus:outline-none bg-transparent text-base font-bold h-8 appearance-none cursor-pointer"
+                    className="w-full border-none focus:outline-none bg-transparent text-sm font-bold h-7 appearance-none cursor-pointer"
                     value={selectedIsland}
                     onChange={(e) => setSelectedIsland(e.target.value)}
                   >
@@ -87,24 +87,24 @@ export default function Home() {
                   </select>
                 </div>
                 
-                <div className="text-left py-2.5 md:border-l md:border-gray-100 md:pl-6">
+                <div className="text-left py-1.5 md:border-l md:border-gray-100 md:pl-5">
                   <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-1">
                     <Calendar size={10} className="text-[var(--color-sky-blue)]" /> Departure
                   </label>
                   <input 
                     type="date" 
-                    className="w-full border-none focus:outline-none bg-transparent text-base font-bold h-8 cursor-pointer"
+                    className="w-full border-none focus:outline-none bg-transparent text-sm font-bold h-7 cursor-pointer"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                   />
                 </div>
                 
-                <div className="text-left py-2.5 md:border-l md:border-gray-100 md:pl-6">
+                <div className="text-left py-1.5 md:border-l md:border-gray-100 md:pl-5">
                   <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-1">
                     <Clock size={10} className="text-[var(--color-sky-blue)]" /> Duration
                   </label>
                   <select 
-                    className="w-full border-none focus:outline-none bg-transparent text-base font-bold h-8 appearance-none cursor-pointer"
+                    className="w-full border-none focus:outline-none bg-transparent text-sm font-bold h-7 appearance-none cursor-pointer"
                     value={selectedDuration}
                     onChange={(e) => setSelectedDuration(e.target.value)}
                   >
@@ -118,9 +118,9 @@ export default function Home() {
               
               <button 
                 onClick={handleSearch}
-                className="w-full md:w-auto bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white px-10 py-4 md:py-5 rounded-md font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98]"
+                className="w-full md:w-auto bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white px-8 py-3 md:py-3.5 rounded-md font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98]"
               >
-                <Search size={18} />
+                <Search size={16} />
                 <span>검색하기</span>
               </button>
             </div>
