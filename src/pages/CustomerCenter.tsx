@@ -22,10 +22,11 @@ export default function CustomerCenter() {
 
   return (
     <div className="pt-32 pb-24 bg-gray-50 min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">고객센터</h1>
         
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex-grow bg-white rounded-2xl shadow-sm overflow-hidden">
           <div className="flex border-b border-gray-200 overflow-x-auto">
             {tabs.map(tab => (
               <button
@@ -122,6 +123,45 @@ export default function CustomerCenter() {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Sidebar Contact Info */}
+        <div className="w-full lg:w-80 shrink-0">
+          <div className="bg-white rounded-2xl shadow-sm p-6 space-y-8 sticky top-24">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">온섬투어 고객센터</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">여행 상담센터</p>
+                  <p className="text-xl font-bold text-[var(--color-sky-blue-dark)]">1544-5252</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">부산/대구출발 여행상담</p>
+                  <p className="text-xl font-bold text-gray-900">1544-6722</p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">기업행사/출장문의</p>
+                  <p className="text-xl font-bold text-gray-900">1661-4873</p>
+                </div>
+                
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-sm text-gray-500 mb-1">고객센터</p>
+                  <p className="text-xl font-bold text-gray-900">080-850-5252</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-blue-50 p-4 rounded-xl">
+              <p className="text-xs text-gray-600 leading-relaxed">
+                평일 09:00 - 18:00<br/>
+                (주말/공휴일 휴무)
+              </p>
+            </div>
+            </div>
           </div>
         </div>
       </div>

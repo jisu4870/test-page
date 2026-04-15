@@ -112,6 +112,28 @@ export default function Home() {
               검색
             </button>
           </div>
+
+          {/* Popular Search Terms */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-white/90">
+            <span className="text-sm font-medium mr-2">인기 검색어:</span>
+            {['울릉도', '덕적도', '소야도', '백령도', '제주도'].map((term) => (
+              <button
+                key={term}
+                onClick={() => {
+                  setSelectedIsland(term);
+                  // Trigger search immediately for convenience
+                  let result = packages.filter(p => p.island === term);
+                  setFilteredPackages(result);
+                  if (packagesRef.current) {
+                    packagesRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="px-4 py-1.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full text-sm transition-colors border border-white/20"
+              >
+                #{term}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -167,6 +189,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Hot Deal LIVE Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                핫딜LIVE 미리보기 <span className="inline-block w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+              </h2>
+              <p className="text-gray-600">라이브 방송에서만 만날 수 있는 파격적인 특가 혜택!</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: '[LIVE 특가] 울릉도 크루즈 & 코스모스 리조트',
+                subtitle: '단 1시간, 역대급 최저가 도전!',
+                date: '2026.04.20 PM 08:00',
+                image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                title: '[LIVE 특가] 덕적도 요트 투어 & 선상 파티',
+                subtitle: 'MZ 취향저격, 요트 위 럭셔리 휴식',
+                date: '2026.04.22 PM 07:00',
+                image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                title: '[LIVE 특가] 소야도 감성 캠핑 패키지',
+                subtitle: '몸만 떠나는 프리미엄 글램핑',
+                date: '2026.04.25 PM 06:00',
+                image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+              }
+            ].map((live, idx) => (
+              <div key={idx} className="group relative rounded-3xl overflow-hidden aspect-[3/4] shadow-lg">
+                <img 
+                  src={live.image} 
+                  alt={live.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+                  <div className="inline-flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-bold mb-4 w-fit">
+                    <Clock size={12} /> 방송예정
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2 leading-tight">
+                    {live.title}
+                  </h3>
+                  <p className="text-white/80 text-sm mb-6">{live.subtitle}</p>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-white/90 text-xs bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+                      <Calendar size={14} /> {live.date}
+                    </div>
+                    <button className="w-full bg-[var(--color-sky-blue)] text-white py-3 rounded-xl font-bold text-sm hover:bg-[var(--color-sky-blue-dark)] transition-all active:scale-95 shadow-lg">
+                      알림설정
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Magazine Preview Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -213,6 +299,130 @@ export default function Home() {
           >
             전체보기 <ArrowRight size={16} />
           </button>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">100% 실제 고객 리뷰 📝</h2>
+            <p className="text-gray-600">온섬투어와 함께한 고객님들의 생생한 여행 후기</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: '김*현',
+                package: 'MZ와 함께하는 2030 힐링여행',
+                rating: 5,
+                content: '덕적도 요트 투어 정말 최고였어요! 친구들과 인생샷도 많이 남기고 럭셔리한 휴식을 즐겼습니다.',
+                date: '2026.04.12'
+              },
+              {
+                name: '이*우',
+                package: '소야도 하이엔드 감성 캠핑 & 트레킹',
+                rating: 5,
+                content: '글램핑 시설이 너무 깨끗하고 좋았어요. 밤에 별이 쏟아지는 걸 보며 불멍했던 시간이 잊혀지지 않네요.',
+                date: '2026.04.08'
+              },
+              {
+                name: '박*아',
+                package: '울릉도 럭셔리 크루즈 & 리조트 투어',
+                rating: 5,
+                content: '코스모스 리조트 패키지 강추합니다. 가이드님도 너무 친절하시고 독도 새우 다이닝은 정말 감동이었습니다.',
+                date: '2026.04.05'
+              },
+              {
+                name: '최*지',
+                package: 'MZ와 함께하는 2030 힐링여행',
+                rating: 5,
+                content: '프라이빗하게 우리 가족끼리만 즐길 수 있어서 안심하고 다녀왔습니다. 버틀러 서비스가 정말 세심했어요!',
+                date: '2026.03.28'
+              }
+            ].map((review, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex text-yellow-400 mb-3">
+                  {[...Array(review.rating)].map((_, i) => (
+                    <span key={i}>★</span>
+                  ))}
+                </div>
+                <p className="text-gray-700 text-sm leading-relaxed mb-4 h-20 overflow-hidden">
+                  "{review.content}"
+                </p>
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-xs font-bold text-gray-900 mb-1">{review.package}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">{review.name} 고객님</span>
+                    <span className="text-xs text-gray-400">{review.date}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Rating 4.5+ Banner */}
+          <div className="mt-12 flex justify-center">
+            <button 
+              onClick={() => navigate('/packages')}
+              className="group flex items-center gap-3 bg-white border border-gray-200 px-6 py-3 rounded-full shadow-sm hover:shadow-md hover:border-[var(--color-sky-blue)] transition-all"
+            >
+              <span className="flex items-center gap-1 text-yellow-400 font-bold">
+                ★ <span className="text-gray-900">평점 4.5+</span>
+              </span>
+              <span className="w-px h-4 bg-gray-200"></span>
+              <span className="text-sm text-gray-600 font-medium group-hover:text-[var(--color-sky-blue)] transition-colors">인기 상품 모두보기</span>
+              <ArrowRight size={14} className="text-gray-400 group-hover:text-[var(--color-sky-blue)] group-hover:translate-x-1 transition-all" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">🎼 쏠쏠한 혜택, 온섬투어가 한 번 더 알려드려요~!</h2>
+            <p className="text-gray-600">여행의 즐거움을 더해주는 온섬투어만의 특별한 혜택</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card Benefit 1 */}
+            <div className="bg-blue-50 p-8 rounded-3xl border border-blue-100 flex flex-col items-center text-center group hover:bg-blue-100 transition-colors">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                <span className="text-2xl">💳</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">신한카드 결제 혜택</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                온섬투어 패키지 결제 시<br/>
+                최대 5% 즉시 할인 + 6개월 무이자 할부
+              </p>
+            </div>
+
+            {/* Card Benefit 2 */}
+            <div className="bg-indigo-50 p-8 rounded-3xl border border-indigo-100 flex flex-col items-center text-center group hover:bg-indigo-100 transition-colors">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                <span className="text-2xl">🏦</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">국민카드 캐시백</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                30만원 이상 결제 시<br/>
+                2만원 캐시백 혜택 (선착순 500명)
+              </p>
+            </div>
+
+            {/* Site Benefit */}
+            <div className="bg-sky-50 p-8 rounded-3xl border border-sky-100 flex flex-col items-center text-center group hover:bg-sky-100 transition-colors">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                <span className="text-2xl">🏝️</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">온섬투어 회원 전용</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                전 상품 예약 시<br/>
+                현지 맛집 3만원 이용권 증정
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
