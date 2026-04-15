@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
+      <section className="relative h-[120vh] flex items-center justify-center">
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{ backgroundImage: `url(${settings.heroImage})` }}
@@ -58,51 +58,57 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
         
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
+        <div className="relative z-10 text-center px-4 w-full max-w-6xl mx-auto mt-20">
+          <h1 className="text-white text-3xl md:text-5xl font-bold mb-6 drop-shadow-lg">
+            당신만을 위한 특별한 섬 여행, 온섬투어
+          </h1>
+          <p className="text-white/90 text-sm md:text-base font-light mb-14 drop-shadow-md">
+            일상의 번잡함을 벗어나, 차별화된 휴식을 경험하세요.
+          </p>
           
-          {/* Search Bar & Banner Area */}
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            {/* Left: Search Area */}
-            <div className="lg:col-span-8 bg-white rounded-none shadow-2xl p-6 md:p-8 flex flex-col justify-between">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="text-left">
-                  <label className="block text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                    <MapPin size={18} className="text-[var(--color-sky-blue)]" /> 어디로 떠나세요?
+          {/* Search Bar Area */}
+          <div className="max-w-3xl mx-auto">
+            {/* Search Area */}
+            <div className="bg-white rounded-lg shadow-xl p-2.5 md:p-3 flex flex-col md:flex-row items-center gap-1">
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-0 w-full px-4 md:px-6">
+                <div className="text-left py-2.5">
+                  <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                    <MapPin size={10} className="text-[var(--color-sky-blue)]" /> Destination
                   </label>
                   <select 
-                    className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-xl font-medium h-[48px] appearance-none cursor-pointer rounded-none"
+                    className="w-full border-none focus:outline-none bg-transparent text-base font-bold h-8 appearance-none cursor-pointer"
                     value={selectedIsland}
                     onChange={(e) => setSelectedIsland(e.target.value)}
                   >
-                    <option value="">전체 섬 선택</option>
+                    <option value="">어디로 떠나세요?</option>
                     {ISLANDS.map(island => (
                       <option key={island} value={island}>{island}</option>
                     ))}
                   </select>
                 </div>
                 
-                <div className="text-left">
-                  <label className="block text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                    <Calendar size={18} className="text-[var(--color-sky-blue)]" /> 출발일
+                <div className="text-left py-2.5 md:border-l md:border-gray-100 md:pl-6">
+                  <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                    <Calendar size={10} className="text-[var(--color-sky-blue)]" /> Departure
                   </label>
                   <input 
                     type="date" 
-                    className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-xl font-medium h-[48px] cursor-pointer rounded-none"
+                    className="w-full border-none focus:outline-none bg-transparent text-base font-bold h-8 cursor-pointer"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                   />
                 </div>
                 
-                <div className="text-left">
-                  <label className="block text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                    <Clock size={18} className="text-[var(--color-sky-blue)]" /> 여행 기간
+                <div className="text-left py-2.5 md:border-l md:border-gray-100 md:pl-6">
+                  <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                    <Clock size={10} className="text-[var(--color-sky-blue)]" /> Duration
                   </label>
                   <select 
-                    className="w-full border-b-2 border-gray-200 pb-2 focus:outline-none focus:border-[var(--color-sky-blue)] bg-transparent text-xl font-medium h-[48px] appearance-none cursor-pointer rounded-none"
+                    className="w-full border-none focus:outline-none bg-transparent text-base font-bold h-8 appearance-none cursor-pointer"
                     value={selectedDuration}
                     onChange={(e) => setSelectedDuration(e.target.value)}
                   >
-                    <option value="">전체 일정 선택</option>
+                    <option value="">여행 기간</option>
                     {DURATIONS.map(duration => (
                       <option key={duration} value={duration}>{duration}</option>
                     ))}
@@ -112,34 +118,11 @@ export default function Home() {
               
               <button 
                 onClick={handleSearch}
-                className="w-full bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white py-5 rounded-none font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-200 active:scale-[0.98]"
+                className="w-full md:w-auto bg-[var(--color-sky-blue)] hover:bg-[var(--color-sky-blue-dark)] text-white px-10 py-4 md:py-5 rounded-md font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98]"
               >
-                <Search size={24} />
-                조건에 맞는 섬 여행 찾기
+                <Search size={18} />
+                <span>검색하기</span>
               </button>
-            </div>
-
-            {/* Right: Discount Banner */}
-            <div className="lg:col-span-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-2xl p-8 text-white flex flex-col justify-center relative overflow-hidden group cursor-pointer">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
-              <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-              
-              <div className="relative z-10">
-                <div className="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold mb-4">
-                  SPECIAL OFFER
-                </div>
-                <h3 className="text-2xl font-bold mb-2 leading-tight">
-                  신규 회원 가입 시<br/>
-                  <span className="text-yellow-300 text-4xl">10% 할인</span>
-                </h3>
-                <p className="text-white/80 text-sm mb-6">
-                  지금 가입하고 첫 섬 여행<br/>
-                  특별한 가격으로 떠나보세요!
-                </p>
-                <div className="flex items-center gap-2 text-sm font-bold group-hover:gap-4 transition-all">
-                  혜택 받으러 가기 <ArrowRight size={18} />
-                </div>
-              </div>
             </div>
           </div>
 

@@ -3,7 +3,6 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, Facebook, MessageCircle, ArrowRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useAppContext } from '../context/AppContext';
-import PromotionModal from './PromotionModal';
 import AIChatBot from './AIChatBot';
 
 export default function Layout() {
@@ -32,43 +31,43 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
-      <PromotionModal />
       <AIChatBot />
       {/* Header */}
       <header className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300', headerBg)}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <Link to="/" className={cn('text-2xl font-bold tracking-tighter flex-1', logoColor)}>
-              온섬투어
-            </Link>
-
-            {/* Top Center Banner */}
-            <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center">
-              <button 
-                onClick={() => {
-                  if (location.pathname !== '/') {
-                    window.location.href = '/#live';
-                  } else {
-                    document.getElementById('live')?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className={cn(
-                  "px-6 py-2 font-bold text-sm transition-all flex items-center gap-2 group",
-                  isHomePage && !isScrolled 
-                    ? "bg-white/10 hover:bg-white/20 text-white border border-white/30" 
-                    : "bg-red-50 hover:bg-red-100 text-red-600 border border-red-200"
-                )}
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                </span>
-                핫딜LIVE
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+            <div className="flex items-center gap-6 flex-1">
+              <Link to="/" className={cn('text-2xl font-bold tracking-tighter', logoColor)}>
+                온섬투어
+              </Link>
+              
+              {/* Hot Deal LIVE Banner - Near Logo */}
+              <div className="pt-1">
+                <button 
+                  onClick={() => {
+                    if (location.pathname !== '/') {
+                      window.location.href = '/#live';
+                    } else {
+                      document.getElementById('live')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className={cn(
+                    "hidden lg:flex px-4 py-1.5 font-bold text-xs transition-all items-center gap-2 group rounded-full",
+                    isHomePage && !isScrolled 
+                      ? "bg-white/10 hover:bg-white/20 text-white border border-white/30" 
+                      : "bg-red-50 hover:bg-red-100 text-red-600 border border-red-200"
+                  )}
+                >
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                  </span>
+                  핫딜LIVE
+                </button>
+              </div>
             </div>
 
-            {/* Desktop Navigation */}
+            {/* Top Right Navigation */}
             <div className="hidden md:flex flex-col items-end flex-1">
               <div className="flex space-x-4 text-[10px] text-gray-400 mb-1">
                 <Link to="/login" className="hover:text-[var(--color-sky-blue)]">로그인</Link>
@@ -92,19 +91,6 @@ export default function Layout() {
                 <Link to="/customer-center" className="hover:text-[var(--color-sky-blue)] transition-colors font-medium">고객센터</Link>
               </nav>
             </div>
-
-            {/* Talk Consultation Banner (Sticky) */}
-            {isScrolled && (
-              <div className="hidden lg:block fixed top-24 right-8 z-40 animate-bounce-slow">
-                <a 
-                  href="#" 
-                  className="bg-yellow-400 text-gray-900 px-4 py-3 rounded-2xl shadow-xl font-bold flex items-center gap-2 hover:scale-105 transition-transform"
-                >
-                  <MessageCircle size={20} fill="currentColor" />
-                  <span className="text-sm">실시간 톡상담</span>
-                </a>
-              </div>
-            )}
 
             {/* Mobile Menu Button */}
             <button 
