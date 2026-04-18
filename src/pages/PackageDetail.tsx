@@ -225,6 +225,16 @@ export default function PackageDetail() {
                         <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                           <CheckCircle size={18} className="text-[var(--color-sky-blue)]" /> {item.title}
                         </h3>
+                        {item.image && (
+                          <div className="mb-4 rounded-xl overflow-hidden aspect-[16/9] md:aspect-[21/9] shadow-sm">
+                            <img 
+                              src={item.image} 
+                              alt={item.title} 
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
+                              referrerPolicy="no-referrer" 
+                            />
+                          </div>
+                        )}
                         <div className="space-y-3">
                           {item.description.split('\n').map((line, i) => {
                              const match = line.match(/^(\[.*?\])(.*)/);

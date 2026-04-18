@@ -4,6 +4,7 @@ import { Search, Calendar, MapPin, Clock, ArrowRight, X, Star } from 'lucide-rea
 import { useAppContext } from '../context/AppContext';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
+import PromotionModal from '../components/PromotionModal';
 
 const ISLANDS = [
   '교동도', '동검도', '황산도', '석모도', '미법도', '서검도', '주문도', '아차도', '볼음도', '말도', 
@@ -77,9 +78,23 @@ export default function Home() {
   const [sortOrder, setSortOrder] = useState('recommended');
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [showAllPackages, setShowAllPackages] = useState(false);
+  const [isPromoOpen, setIsPromoOpen] = useState(false);
   
   const packagesRef = useRef<HTMLDivElement>(null);
   const [filteredPackages, setFilteredPackages] = useState(packages);
+
+  useEffect(() => {
+    // Check if we should show the promo modal
+    const hiddenUntil = localStorage.getItem('promo_hidden_until');
+    const now = new Date().getTime();
+    
+    if (!hiddenUntil || now > parseInt(hiddenUntil)) {
+      const timer = setTimeout(() => {
+        setIsPromoOpen(true);
+      }, 1500); // Show after 1.5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -149,6 +164,21 @@ export default function Home() {
 
   return (
     <div className="w-full">
+      {/* Promotion Modal */}
+      <PromotionModal 
+        isOpen={isPromoOpen} 
+        onClose={() => setIsPromoOpen(false)} 
+        onAction={() => {
+          if (packagesRef.current) {
+            packagesRef.current.scrollIntoView({ behavior: 'smooth' });
+          }
+          // Optionally filter for "Special" deals
+          const result = packages.filter(p => p.status === '특가' || p.status === 'BEST');
+          setFilteredPackages(result);
+          setShowAllPackages(true);
+        }}
+      />
+
       {/* Hero Section */}
       <section className="relative h-[120vh] flex items-center justify-center">
         <div 
@@ -226,28 +256,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Popular Search Terms */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-white/90">
-            <span className="text-sm font-medium mr-2">인기 검색어:</span>
-            {['울릉도', '덕적도', '소야도', '백령도', '제주도'].map((term) => (
-              <button
-                key={term}
-                onClick={() => {
-                  setSelectedIsland(term);
-                  // Trigger search immediately for convenience
-                  let result = packages.filter(p => p.island === term);
-                  setFilteredPackages(result);
-                  setShowAllPackages(true);
-                  if (packagesRef.current) {
-                    packagesRef.current.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="px-4 py-1.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full text-sm transition-colors border border-white/20"
-              >
-                {term}
-              </button>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -474,13 +482,13 @@ export default function Home() {
                 title: '삼시세끼 in 덕적 소야',
                 subtitle: '청춘들을 위한 감성 캠핑 & 요트 투어 특가',
                 date: '2026.04.20 PM 08:00',
-                image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                image: 'https://isum.incheon.go.kr/resource/www/images/sub/img_island_info21.jpg'
               },
               {
-                title: '[LIVE 특가] 소야도 감성 캠핑 패키지',
-                subtitle: '몸만 떠나는 프리미엄 글램핑',
+                title: '[신의 조각품] 백령도 3일',
+                subtitle: '서해 최북단의 비경, 백령도를 가장 깊이 있게 만나는 시간',
                 date: '2026.04.25 PM 06:00',
-                image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                image: 'https://isum.incheon.go.kr/resource/www/images/sub/img_island_info18.jpg'
               }
             ].map((live, idx) => (
               <div key={idx} className="group relative rounded-3xl overflow-hidden aspect-[3/4] shadow-lg">
@@ -587,29 +595,29 @@ export default function Home() {
                 name: '김*현',
                 package: '삼시세끼 in 덕적 소야',
                 rating: 5,
-                content: '덕적도 요트 투어 정말 최고였어요! 친구들과 인생샷도 많이 남기고 럭셔리한 휴식을 즐겼습니다.',
+                content: '덕적도 스탬프 투어 정말 최고였어요! 소야 9경 둘러보면서 인생샷도 많이 남기고 맛있는 로컬 음식까지 완벽한 휴식이었습니다.',
                 date: '2026.04.12'
               },
               {
                 name: '이*우',
-                package: '소야도 하이엔드 감성 캠핑 & 트레킹',
+                package: '시간 탐험대: 소야덕적 조각의 비밀!',
                 rating: 5,
-                content: '글램핑 시설이 너무 깨끗하고 좋았어요. 밤에 별이 쏟아지는 걸 보며 불멍했던 시간이 잊혀지지 않네요.',
+                content: '아이들이 소야도 바닷길에서 조개 줍고 도자기 체험하는 걸 너무 좋아했어요. 역사 공부도 되고 퍼즐 미션까지 있어서 가족 여행으로 딱이네요!',
                 date: '2026.04.08'
               },
               {
                 name: '박*아',
                 package: '울릉도 럭셔리 크루즈 & 리조트 투어',
                 rating: 5,
-                content: '코스모스 리조트 패키지 강추합니다. 가이드님도 너무 친절하시고 독도 새우 다이닝은 정말 감동이었습니다.',
+                content: '코스모스 리조트 패키지 강추합니다. 가이드님도 너무 친절하시고 독도 새우 다이닝은 정말 감동이었습니다. 크루즈 여행이라 정말 편했어요.',
                 date: '2026.04.05'
               },
               {
-                name: '최*지',
-                package: '삼시세끼 in 덕적 소야',
+                name: '정*윤',
+                package: '[신의 조각품] 백령도 3일',
                 rating: 5,
-                content: '프라이빗하게 우리 가족끼리만 즐길 수 있어서 안심하고 다녀왔습니다. 버틀러 서비스가 정말 세심했어요!',
-                date: '2026.03.28'
+                content: '두무진의 기암절벽은 정말 신의 조각품이라는 말이 아깝지 않네요. 사곶 천연비행장도 신기했고 가이드님의 친절한 설명 덕분에 역사적으로도 뜻깊은 시간이었습니다.',
+                date: '2026.04.15'
               }
             ].map((review, idx) => (
               <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
