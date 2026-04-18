@@ -4,10 +4,12 @@ import { Menu, X, Instagram, Facebook, MessageCircle, ArrowRight } from 'lucide-
 import { cn } from '../lib/utils';
 import { useAppContext } from '../context/AppContext';
 import AIChatBot from './AIChatBot';
+import FloatingActionMenu from './FloatingActionMenu';
 
 export default function Layout() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const location = useLocation();
   const { settings } = useAppContext();
 
@@ -31,7 +33,8 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
-      <AIChatBot />
+      <AIChatBot isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
+      <FloatingActionMenu onToggleChat={() => setIsChatOpen(!isChatOpen)} isChatOpen={isChatOpen} />
       {/* Header */}
       <header className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300', headerBg)}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -160,21 +163,30 @@ export default function Layout() {
                 <li><Link to="/customer-center?tab=notice" className="hover:text-white transition-colors">공지사항</Link></li>
                 <li><Link to="/customer-center?tab=faq" className="hover:text-white transition-colors">자주묻는질문</Link></li>
                 <li><Link to="/customer-center?tab=reservation" className="hover:text-white transition-colors">예약확인/취소</Link></li>
-                <li><Link to="/customer-center?tab=terms" className="hover:text-white transition-colors">여행약관</Link></li>
+                <li><Link to="/customer-center?tab=terms" className="hover:text-white transition-colors">이용약관</Link></li>
+                <li><Link to="/customer-center?tab=privacy" className="hover:text-white transition-colors font-bold text-[var(--color-sky-blue)]">개인정보처리방침</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-4">Contact</h4>
+              <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/magazine" className="hover:text-white transition-colors">인기 매거진</Link></li>
+                <li><Link to="/monthly" className="hover:text-white transition-colors">이달의 추천 섬</Link></li>
+                <li><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-white transition-colors text-left w-full">Top으로 이동</button></li>
+              </ul>
+              <h4 className="text-white font-semibold mb-4 mt-8">Contact</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>Email: {settings.contactEmail}</li>
                 <li>Tel: {settings.contactPhone}</li>
                 <li>영업시간: 평일 09:00 - 18:00</li>
               </ul>
-              <div className="mt-6">
+              <div className="mt-6 flex gap-4 items-center">
                 <Link to="/admin" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
-                  관리자 로그인
+                  관리자
                 </Link>
+                <span className="text-gray-800">|</span>
+                <span className="text-[10px] text-gray-600">v2.4.0</span>
               </div>
             </div>
           </div>

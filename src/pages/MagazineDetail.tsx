@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
+import ReactMarkdown from 'react-markdown';
+
 export default function MagazineDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -44,13 +46,29 @@ export default function MagazineDetail() {
         </div>
 
         <div className="rounded-2xl overflow-hidden mb-12 h-[50vh]">
-          <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+          <img src={post.image} alt={post.title} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
         </div>
 
         <div className="prose prose-lg max-w-none text-gray-700 leading-loose">
-          {post.content.split('\n').map((paragraph, idx) => (
-            <p key={idx} className="mb-6">{paragraph}</p>
-          ))}
+          <ReactMarkdown
+            components={{
+              img: ({ node, ...props }) => (
+                <img 
+                  {...props} 
+                  referrerPolicy="no-referrer" 
+                  className="rounded-2xl shadow-md my-8 w-full object-cover" 
+                />
+              ),
+              h3: ({ node, ...props }) => (
+                <h3 {...props} className="text-2xl font-bold text-gray-900 mt-12 mb-6" />
+              ),
+              p: ({ node, ...props }) => (
+                <p {...props} className="mb-6 whitespace-pre-wrap" />
+              )
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
         </div>
       </div>
     </div>

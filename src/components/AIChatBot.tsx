@@ -2,21 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, X, Bot, User, ChevronUp, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function AIChatBot() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showTopButton, setShowTopButton] = useState(false);
+interface AIChatBotProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowTopButton(window.scrollY > 300);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+export default function AIChatBot({ isOpen, setIsOpen }: AIChatBotProps) {
   const [messages, setMessages] = useState([
     { role: 'bot', content: '안녕하세요! 온섬투어 AI 상담사입니다. 무엇을 도와드릴까요?' }
   ]);
@@ -53,48 +44,9 @@ export default function AIChatBot() {
   };
 
   return (
-    <>
-      {/* Floating Buttons Group */}
-      <div className="fixed bottom-8 right-8 z-[60] flex flex-col gap-3 items-center">
-        {/* AI Chat Button */}
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-16 h-16 bg-[var(--color-sky-blue)] text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform group relative"
-        >
-          <MessageSquare size={28} className="group-hover:rotate-12 transition-transform" />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full animate-bounce">AI</span>
-        </button>
-
-        {/* Recently Viewed Button */}
-        <button
-          className="w-12 h-12 bg-white text-gray-600 rounded-full shadow-lg flex flex-col items-center justify-center hover:bg-gray-50 transition-colors border border-gray-100 group"
-          title="최근 본 항목"
-        >
-          <Eye size={20} />
-          <span className="text-[8px] font-bold">최근본</span>
-        </button>
-
-        {/* Top Button */}
-        <AnimatePresence>
-          {showTopButton && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              onClick={scrollToTop}
-              className="w-12 h-12 bg-white text-gray-600 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-100"
-              title="맨 위로"
-            >
-              <ChevronUp size={24} />
-            </motion.button>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Chat Window */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 100, x: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 100, x: 50 }}
@@ -150,7 +102,6 @@ export default function AIChatBot() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
-    </>
+    </AnimatePresence>
   );
 }

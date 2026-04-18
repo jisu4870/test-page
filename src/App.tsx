@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import MonthlyRecommendations from './pages/MonthlyRecommendations';
 import PackageDetail from './pages/PackageDetail';
 import Magazine from './pages/Magazine';
 import MagazineDetail from './pages/MagazineDetail';
@@ -21,6 +22,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="monthly" element={<MonthlyRecommendations />} />
             <Route path="packages" element={<Navigate to="/" replace />} />
             <Route path="package/:id" element={<PackageDetail />} />
             <Route path="magazine" element={<Magazine />} />
