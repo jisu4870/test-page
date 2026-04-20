@@ -42,7 +42,7 @@ export default function PromotionModal({ isOpen, onClose, onAction }: PromotionM
           {/* Banner Image Content */}
           <div className="relative h-64 bg-[var(--color-sky-blue)] overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+              src="https://postfiles.pstatic.net/MjAyNjA0MjBfMTcy/MDAxNzc2NjgwMzI5Mzk2._NqdBUiuxUjPWFpdKEd4hOMMtnMeiiPxpL37XT-WJEcg.BDLG4Fs7FEzEb49-NuniCssqyd6MH_4_48hK37v_N38g.JPEG/KakaoTalk_20260420_113500271.jpg?type=w773" 
               alt="Weekend Special"
               className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60"
             />

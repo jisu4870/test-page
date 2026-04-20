@@ -470,7 +470,7 @@ export default function Home() {
                 title: '[LIVE 특가] 시간 탐험대: 소야덕적 조각의 비밀!',
                 subtitle: '아이와 함께 떠나는 역사 탐험 & 호박잼 만들기 체험',
                 date: '2026.04.18 PM 08:00',
-                image: 'https://img1.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202508/27/speaktravel/20250827140002969nwhf.jpg'
+                image: 'https://postfiles.pstatic.net/MjAyNjA0MjBfMTcy/MDAxNzc2NjgwMzI5Mzk2._NqdBUiuxUjPWFpdKEd4hOMMtnMeiiPxpL37XT-WJEcg.BDLG4Fs7FEzEb49-NuniCssqyd6MH_4_48hK37v_N38g.JPEG/KakaoTalk_20260420_113500271.jpg?type=w773'
               },
               {
                 title: '[신비의 풀등] 대이작도 힐링 탐방',

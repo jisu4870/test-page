@@ -54,7 +54,7 @@ const defaultPackages: TourPackage[] = [
     status: 'BEST',
     category: '힐링',
     gallery: [
-      'https://dry7pvlp22cox.cloudfront.net/mrt-images-prod/2024/09/06/DRlr/gd15Byf2Tg.jpg',
+      'https://postfiles.pstatic.net/MjAyNjA0MjBfMjYx/MDAxNzc2NjgwMzMwNzgz.vHbjXiDHDLzdqycoLuNYlzH82DBT4DEqNUjgcb2GUVsg.ZpFEVzM7sCFOEIoU1KAwDPltsWQN68yKaxua4wmT0Icg.PNG/KakaoTalk_20260420_113500271_01.png?type=w773',
       'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeExterior&lnkgSn=2407110008&ordr=1',
       'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeInside1&lnkgSn=2407110002&ordr=1'
     ],
@@ -64,14 +64,12 @@ const defaultPackages: TourPackage[] = [
       { 
         day: 1, 
         title: '인천항 출발 및 소야 9경 투어', 
-        image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop',
-        description: '[08:00~09:10] 인천 연안여객터미널 ~ 덕적도 진리선착장\n[오전 일정] 소야 9경 투어버스 탑승 및 소야도 이동\n소야 9경 스탬프 투어 (4경 모세의 기적)\n[중식 시간] 소야랑 카페 로컬 브런치 or 김굴국밥 (선택형 식사)\n[오후 일정] 소야 9경 스탬프 투어 (7경 곰바위/막끝)\n[석식 시간] 회정식\n[야간 일정] 소야 9경 스탬프 투어 (2경 죽노골 청사초롱 투어)\n소야 9경 투어버스 탑승 및 덕적도 이동\n밧지름 or 떼뿌루 해변 별별 투어 (선택형 관광)\n[개별 자유] 숙소: 덕적도 365아일랜드 팬션 or 떼뿌루 야영장 (선택형 숙박)' 
+        description: '[08:00~09:10] 인천 연안여객터미널 ~ 덕적도 진리선착장\n[오전 일정] 소야 9경 투어버스 탑승 및 소야도 이동\n소야 9경 스탬프 투어 (4경 모세의 기적)\n[중식 시간] 소야랑 카페 or 김굴국밥 (선택형 식사)\n* 브런치: 단호박 구슬 로제 떡볶이, 단호박 오픈 샌드위치\n[오후 일정] 소야 9경 스탬프 투어 (7경 곰바위/막끝)\n[석식 시간] 회정식\n[야간 일정] 소야 9경 스탬프 투어 (2경 죽노골 청사초롱 투어)\n소야 9경 투어버스 탑승 및 덕적도 이동\n밧지름 또는 떼뿌루 해변에서 밤하늘 은하수, 별 감상\n숙소 이동 및 자유시간\n숙소: 덕적도 365아일랜드 팬션 or 떼뿌루 야영장 (선택형 숙박)' 
       },
       { 
         day: 2, 
         title: '덕적 8경 투어 및 호박회관 체험', 
-        image: 'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeInside1&lnkgSn=2407110008&ordr=1',
-        description: '[08:00~] 체크아웃 후 아침식사\n[오전 일정] 덕적 8경 투어 버스 탑승\n덕적 8경 투어 or 비조봉 트레킹 (선택형 관광)\n[중식 시간] 간재미 정식\n[오후 일정] 호박회관 체험 해당화 (릴렉싱 향초 만들기 or 단호박 막걸리 만들기) (선택형 관광)\n[16:00~17:10] 덕적도 출도 (덕적도 진리 선착장 ~ 인천 연안 여객 터미널)' 
+        description: '[09:00~] 체크아웃 후 아침식사\n[오전 일정] 덕적 8경 투어 버스 탑승\n덕적 8경 투어 or 비조봉 트레킹 (선택형 관광)\n[중식 시간] 간재미 정식\n[오후 일정] 호박회관 체험 해당화 (릴렉싱 향초 만들기 or 단호박 막걸리 만들기) (선택형 관광)\n[16:00~17:10] 덕적도 출도 (덕적도 진리 선착장 ~ 인천 연안 여객 터미널)' 
       }
     ]
   },
@@ -81,14 +79,13 @@ const defaultPackages: TourPackage[] = [
     island: '소야도',
     duration: '1박 2일',
     price: 168000,
-    image: 'https://isum.incheon.go.kr/resource/www/images/sub/img_island_info22.jpg',
+    image: 'https://postfiles.pstatic.net/MjAyNjA0MjBfMTcy/MDAxNzc2NjgwMzI5Mzk2._NqdBUiuxUjPWFpdKEd4hOMMtnMeiiPxpL37XT-WJEcg.BDLG4Fs7FEzEb49-NuniCssqyd6MH_4_48hK37v_N38g.JPEG/KakaoTalk_20260420_113500271.jpg?type=w773',
     status: '특가',
     category: '가족',
     gallery: [
-      'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeInside2&lnkgSn=2407110004&ordr=1',
+      'https://dry7pvlp22cox.cloudfront.net/mrt-images-prod/2024/09/06/DRlr/gd15Byf2Tg.jpg',
       'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeExterior&lnkgSn=2407110007&ordr=1',
-      'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeInside1&lnkgSn=2407110008&ordr=1',
-      'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=800&auto=format&fit=crop'
+      'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeInside1&lnkgSn=2407110008&ordr=1'
     ],
     description: '소야도와 덕적도에 숨겨진 역사의 조각과 자연의 아름다움을 찾아 떠나는 가족형 에듀 투어 패키지입니다.\n\n3.1운동의 뜨거운 열기와 섬의 수호자 최분도 신부님의 공헌을 되새기는 역사 탐방부터, 신비로운 바닷길과 아름다운 노송숲 산책까지 알차게 구성되었습니다. 조개껍데기 채집과 도자기 체험, 단호박잼 만들기 등 아이들을 위한 퍼즐 미션형 체험 프로그램이 가득합니다.\n\n파도 소리와 별빛이 함께하는 소야도에서 우리 가족만의 소중한 비밀 조각을 모아보세요!',
     ferryInfo: '출항: 인천항 연안여객터미널 오전 08:30 출발 (옹진훼미리호, 약 1시간 10분 소요)\n입항: 덕적도 진리선착장 및 소야도 선착장 이용',
@@ -96,14 +93,12 @@ const defaultPackages: TourPackage[] = [
       { 
         day: 1, 
         title: '덕적도 입도 및 소야도 감성 체험', 
-        image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=800&auto=format&fit=crop',
-        description: '[08:00~09:10] 덕적도 입도 (인천 연안 여객 터미널 ~ 덕적도 진리 선착장)\n[오전 일정] 투어버스 탑승 후 소야도로 이동\n모세의 기적 (조개껍데기 채집)\n[중식 시간] 소야랑 카페\n[오후 일정] 떼뿌루 해변 피크닉\n소야량 도자기 체험 (소야도만의 조개 스탬프 도자기)\n[석식 시간] 회나라 식당\n[야간 일정] 밧지름 해수욕장으로 이동 및 별별투어' 
+        description: '[08:00~09:10] 덕적도 입도 (인천 연안 여객 터미널 ~ 덕적도 진리 선착장)\n[오전 일정] 투어버스 탑승 후 소야도로 이동\n모세의 기적 (조개껍데기 채집)\n[중식 시간] 소야랑 카페\n* 브런치: 단호박 구슬 로제 떡볶이, 단호박 오픈 샌드위치\n[오후 일정] 떼뿌루 해변 피크닉 *피크닉 세트 대여\n소야량 도자기 체험 (소야도만의 조개 스탬프 도자기)\n[석식 시간] 덕적도 이동 및 석식(회나라 식당)\n[야간 일정] 밧지름 해수욕장으로 이동 및 별별투어\n숙소 이동 및 자유시간\n숙소: 365 아일랜드 팬션' 
       },
       { 
         day: 2, 
         title: '역사 탐방과 퍼즐 미션 투어', 
-        image: 'https://isum.incheon.go.kr/atch/getImg.do?upKey=storeInside1&lnkgSn=2407110008&ordr=1',
-        description: '[08:00~] 체크아웃 및 조식 * 바다향기 식당\n[오전 일정] 서포리해변 노송숲 산책, 최분도 신부 공덕비(퍼즐미션)\n덕적도성당(퍼즐미션 및 인형극 관람)\n밧지름 해변으로 이동, 3.1운동탑, 충훈탑(퍼즐미션)\n[중식 시간] 간재미 정식\n[오후 일정] 북리등대(퍼즐미션)\n호박회관 체험(단호박잼 만들기)\n[16:00~17:10] 덕적도 출도 (덕적도 진리 선착장 ~ 인천 연안 여객 터미널)' 
+        description: '[08:00~] 체크아웃 및 조식 (바다향기 식당)\n[오전 일정] 서포리해변 노송숲 산책, 최분도 신부 공덕비(퍼즐미션)\n덕적도성당(퍼즐미션 및 인형극 관람)\n밧지름 해변으로 이동, 3.1운동탑, 충훈탑(퍼즐미션)\n[중식 시간] 간재미 정식\n[오후 일정] 북리등대(퍼즐미션)\n호박회관 체험(단호박잼 만들기)\n[16:00~17:10] 덕적도 출도 (덕적도 진리 선착장 ~ 인천 연안 여객 터미널)' 
       }
     ]
   },
@@ -125,8 +120,8 @@ const defaultPackages: TourPackage[] = [
     description: '신비의 섬 울릉도를 가장 알차고 고급스럽게 여행하는 1박 2일 VIP 전용 패키지입니다.\n\n멀고 험한 울릉도 가는 길을 VIP 전용 대형 쾌속 크루즈의 스위트 객실로 편안하게 모십니다. 숙소는 세계적인 건축 디자인 상을 수상한 울릉도 최고의 럭셔리 리조트 \'코스모스\'로 배정됩니다.\n\n짧은 일정이지만 전문 해설 가이드와 고급 세단이 배정되어 프라이빗하게 울릉도의 핵심 명소를 모두 둘러볼 수 있습니다. 식사 역시 울릉도 특산물인 독도 새우, 울릉 약소 등을 활용한 최고급 파인 다이닝으로 구성됩니다.',
     ferryInfo: '출항: 포항 영일만항 오전 08:00 출발 (울릉크루즈 스위트룸, 약 3시간 30분 소요)\n입항: 울릉도 사동항 오후 15:30 출발 (포항 19:00 도착 예정)\n* 기상 악화 시 결항될 수 있으며, 이 경우 전액 환불 또는 일정 변경이 가능합니다.',
     itinerary: [
-      { day: 1, title: 'VIP 크루즈 탑승 및 울릉도 핵심 투어', image: 'https://images.unsplash.com/photo-1548574505-12737441edb2?q=80&w=800&auto=format&fit=crop', description: '07:30 포항 영일만항 VIP 라운지 이용.\n08:00 울릉크루즈 스위트 객실 탑승.\n11:30 울릉도 사동항 도착 및 전용 세단 픽업.\n12:30 나리분지 전통 식당에서 산채 비빔밥 특식.\n14:00 거북바위, 태하 모노레일 탑승 및 대풍감 절경 감상.\n16:30 럭셔리 리조트 코스모스 체크인 및 웰컴 티타임.\n19:00 리조트 레스토랑에서 즐기는 울릉 약소 및 독도 새우 파인 다이닝.' },
-      { day: 2, title: '관음도 트레킹 및 아쉬운 작별', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop', description: '08:00 리조트 조식 후 체크아웃.\n09:30 관음도 연도교 트레킹 및 천부 해중전망대 관람.\n12:00 활어회 스페셜 런치.\n13:30 해안도로 드라이브 및 특산물 쇼핑 타임.\n15:00 사동항으로 이동 및 수속.\n15:30 울릉도 출발.\n19:00 포항 영일만항 도착 및 리무진 샌딩 서비스로 일정 종료.' }
+      { day: 1, title: 'VIP 크루즈 탑승 및 울릉도 핵심 투어', description: '07:30 포항 영일만항 VIP 라운지 이용.\n08:00 울릉크루즈 스위트 객실 탑승.\n11:30 울릉도 사동항 도착 및 전용 세단 픽업.\n12:30 나리분지 전통 식당에서 산채 비빔밥 특식.\n14:00 거북바위, 태하 모노레일 탑승 및 대풍감 절경 감상.\n16:30 럭셔리 리조트 코스모스 체크인 및 웰컴 티타임.\n19:00 리조트 레스토랑에서 즐기는 울릉 약소 및 독도 새우 파인 다이닝.' },
+      { day: 2, title: '관음도 트레킹 및 아쉬운 작별', description: '08:00 리조트 조식 후 체크아웃.\n09:30 관음도 연도교 트레킹 및 천부 해중전망대 관람.\n12:00 활어회 스페셜 런치.\n13:30 해안도로 드라이브 및 특산물 쇼핑 타임.\n15:00 사동항으로 이동 및 수속.\n15:30 울릉도 출발.\n19:00 포항 영일만항 도착 및 리무진 샌딩 서비스로 일정 종료.' }
     ]
   },
   {
@@ -146,9 +141,9 @@ const defaultPackages: TourPackage[] = [
     description: '서해 최북단의 비경, 백령도를 가장 깊이 있게 만나는 2박 3일 일정입니다. 유람선을 타고 감상하는 두무진의 기암괴석과 세계 유일의 사곶 천연 비행장, 그리고 자장가 같은 파도 소리의 콩돌 해변까지 백령도의 진수를 경험하세요.',
     ferryInfo: '출항: 인천항 연안여객터미널 오전 07:50 출발 (프린세스호/하모니플라워호)\n입항: 백령도 용기포항 오후 13:00 출발\n* 기상 상황에 따라 선박 시간이 변동될 수 있습니다.',
     itinerary: [
-      { day: 1, title: '인천항 출발 및 백령도 입도', image: 'https://isum.incheon.go.kr/resource/www/images/sub/img_island_info18.jpg', description: '인천항 연안여객터미널 미팅 및 선박 탑승. 백령도 도착 후 가이드 미팅. 사곶 천연비행장 산책 및 심청각 관람. 현지 해산물 정식 석식.' },
-      { day: 2, title: '두무진 비경 및 기암괴석 탐방', image: 'https://images.unsplash.com/photo-1596395819057-cb31a1532050?q=80&w=1000&auto=format&fit=crop', description: '조식 후 두무진 이동. 유람선 탑승하여 선대암, 형제바위 등 기암절벽 관람. 두무진 도보 트레킹 및 콩돌해변 산책. 백령도 명물 냉면 특식.' },
-      { day: 3, title: '중촌포구 및 아쉬운 이별', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop', description: '조식 후 중촌포구 및 용기포 해수욕장 관람. 특산물 판매장 방문. 용기포항 이동 및 선박 탑승. 인천항 도착 및 해산.' }
+      { day: 1, title: '인천항 출발 및 백령도 입도', description: '인천항 연안여객터미널 미팅 및 선박 탑승. 백령도 도착 후 가이드 미팅. 사곶 천연비행장 산책 및 심청각 관람. 현지 해산물 정식 석식.' },
+      { day: 2, title: '두무진 비경 및 기암괴석 탐방', description: '조식 후 두무진 이동. 유람선 탑승하여 선대암, 형제바위 등 기암절벽 관람. 두무진 도보 트레킹 및 콩돌해변 산책. 백령도 명물 냉면 특식.' },
+      { day: 3, title: '중촌포구 및 아쉬운 이별', description: '조식 후 중촌포구 및 용기포 해수욕장 관람. 특산물 판매장 방문. 용기포항 이동 및 선박 탑승. 인천항 도착 및 해산.' }
     ]
   },
   {

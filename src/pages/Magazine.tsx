@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
-const CATEGORIES = ['전체', '테마 여행', '트레킹/캠핑', '역사 탐방', '여행 팁', '맛집 추천', '숙소 리뷰', '체험 관광', '섬 에세이'];
+const CATEGORIES = ['전체', '테마 여행', '역사 탐방', '여행 팁', '숙소 리뷰', '체험 관광', '섬 에세이'];
 
 export default function Magazine() {
   const { magazines } = useAppContext();

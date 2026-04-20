@@ -54,7 +54,7 @@ const MONTHLY_REVIEWS = [
     island: '소야도',
     theme: '신비로운 바닷길과 감성 캠핑',
     description: '6월의 이른 여름, 소야도에서는 하루에 두 번 열리는 신비로운 바닷길을 만날 수 있습니다. 떼뿌루 해수욕장에서 즐기는 캠핑은 낭만 그 자체입니다.',
-    image: 'https://isum.incheon.go.kr/resource/www/images/sub/img_island_info22.jpg',
+    image: 'https://postfiles.pstatic.net/MjAyNjA0MjBfMTcy/MDAxNzc2NjgwMzI5Mzk2._NqdBUiuxUjPWFpdKEd4hOMMtnMeiiPxpL37XT-WJEcg.BDLG4Fs7FEzEb49-NuniCssqyd6MH_4_48hK37v_N38g.JPEG/KakaoTalk_20260420_113500271.jpg?type=w773',
     tags: ['#바닷길', '#캠핑명소', '#인생샷'],
     icon: <Sun className="text-orange-400" />
   },

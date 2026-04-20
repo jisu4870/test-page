@@ -7,6 +7,7 @@ import {
 import { useAppContext } from '../context/AppContext';
 import DestinationInfo from '../components/DestinationInfo';
 import { cn } from '../lib/utils';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function PackageDetail() {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +19,8 @@ export default function PackageDetail() {
   const [showReservationForm, setShowReservationForm] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [selectedImage, setSelectedImage] = useState(pkg?.image || '');
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState('');
 
   const itineraryRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -124,13 +127,22 @@ export default function PackageDetail() {
           <div className="lg:col-span-2 space-y-10">
             {/* Gallery Section */}
             <section className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 p-2">
-              <div className="aspect-[16/9] w-full rounded-xl overflow-hidden mb-2">
+              <div 
+                className="aspect-[16/9] w-full rounded-xl overflow-hidden mb-2 cursor-zoom-in relative group"
+                onClick={() => {
+                  setLightboxImage(selectedImage);
+                  setIsLightboxOpen(true);
+                }}
+              >
                 <img 
                   src={selectedImage} 
                   alt={pkg.title} 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
                   referrerPolicy="no-referrer"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <Camera className="text-white opacity-0 group-hover:opacity-100 transition-opacity" size={32} />
+                </div>
               </div>
               <div className="flex gap-2 overflow-x-auto pb-1 px-1">
                 {[pkg.image, ...(pkg.gallery || [])].map((img, idx) => (
@@ -138,7 +150,7 @@ export default function PackageDetail() {
                     key={idx}
                     onClick={() => setSelectedImage(img)}
                     className={cn(
-                      "flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all",
+                      "flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all relative group",
                       selectedImage === img ? "border-[var(--color-sky-blue)]" : "border-transparent opacity-70 hover:opacity-100"
                     )}
                   >
@@ -440,6 +452,55 @@ export default function PackageDetail() {
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {isLightboxOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center"
+            >
+              <button 
+                onClick={() => setIsLightboxOpen(false)}
+                className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors"
+              >
+                <X size={32} />
+              </button>
+              <img 
+                src={lightboxImage} 
+                alt="Enlarged view" 
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                referrerPolicy="no-referrer"
+              />
+              {/* Image Selector inside Lightbox */}
+              <div className="mt-6 flex gap-2 overflow-x-auto pb-2 px-4 max-w-full">
+                {[pkg.image, ...(pkg.gallery || [])].map((img, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => setLightboxImage(img)}
+                    className={cn(
+                      "flex-shrink-0 w-16 h-12 rounded-md overflow-hidden border-2 transition-all",
+                      lightboxImage === img ? "border-[var(--color-sky-blue)]" : "border-white/20 hover:border-white/50"
+                    )}
+                  >
+                    <img src={img} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

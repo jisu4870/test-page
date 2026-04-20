@@ -40,7 +40,15 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-6 flex-1">
-              <Link to="/" className={cn('text-2xl font-bold tracking-tighter', logoColor)}>
+              <Link 
+                to="/" 
+                onClick={() => {
+                  if (location.pathname === '/') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+                className={cn('relative z-10 text-2xl font-bold tracking-tighter transition-transform active:scale-95', logoColor)}
+              >
                 온섬투어
               </Link>
               
